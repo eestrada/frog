@@ -73,7 +73,9 @@
                  (our-encode uri-path)))
     (published () ,(rfc-8601/universal date))
     (updated () ,(rfc-8601/universal date))
-    (author (name ,(current-author)))
+    ,@(if (not (null? authors))
+         (map (lambda (n) `(author (name ,n))) authors)
+         `((author (name ,(current-author)))))
     (content
      ([type "html"])
      "<html>"
